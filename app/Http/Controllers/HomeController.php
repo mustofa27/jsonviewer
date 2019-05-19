@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Main_table;
+use DataTables;
 
 class HomeController extends Controller
 {
@@ -22,16 +23,32 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($kode)
+    public function index()
     {
-        if(strcmp($kode, "all") == 0){
-            $data['main'] = Main_table::all();
-        } else{
-            $data['main'] = Main_table::where('airline',$kode)->get();
-        }
         $data['title'] = "Admin";
-        return view('home', compact('data'));
+        return view('home');
     }
+
+    public function ajax(Request $request){
+        $terminal = $request->terminal;
+        $kode = $request->kode;
+        if($kode==''){
+            if($terminal==''){
+                $data = Main_table::all();
+            } else{
+                $data = Main_table::where('terminal',$terminal)->get();
+            }
+        } else{
+            $data = Main_table::where('airline',$kode);
+            if($terminal==''){
+                $data->get();
+            } else{
+                $data = $data->where('terminal',$terminal)->get();
+            }
+        }
+        return DataTables::of($data)->make(true);
+    }
+
     public function getdata()
     {
         $username='ict.sub';

@@ -38,43 +38,48 @@ class GetData extends Command
      */
     public function handle()
     {
-        $username='ict.sub';
-        $password='P@ssw0rdIT';
-        //$URL='http://10.2.19.22/api/operational?new_time_gte=2019-01-20T06:00:00&new_time_lte=2019-01-20T06:59:59';
-        $URL='localhost/json_viewer/public/dummydata';
-         // $data = array("account" => "1234", "dob" => "30051987", "site" => "mytestsite.com");
+        $page = 0;
+        $URL='http://10.2.19.22/api/operational?new_time_gte=0000-00-01T00:00:01&new_time_lte=2019-05-19T23:59:59&page=';
+        //$URL='localhost/jsonviewer/public/dummydata?page=';
+        $next = 'ada';
+        while(!is_null($next)){
+            $page++;
+            $username='ict.sub';
+            $password='P@ssw0rdIT';
+             // $data = array("account" => "1234", "dob" => "30051987", "site" => "mytestsite.com");
+            $url = $URL.$page;
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL,$url);
+            curl_setopt($ch, CURLOPT_TIMEOUT, 30); //timeout after 30 seconds
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER,1);
+            curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
+            curl_setopt($ch, CURLOPT_USERPWD, "$username:$password");
 
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL,$URL);
-        curl_setopt($ch, CURLOPT_TIMEOUT, 30); //timeout after 30 seconds
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER,1);
-        curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
-        //curl_setopt($ch, CURLOPT_USERPWD, "$username:$password");
+            $result=curl_exec ($ch);
+            $status_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);   //get status code
+            curl_close ($ch);
 
-        $result=curl_exec ($ch);
-        $status_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);   //get status code
-        curl_close ($ch);
-
-        $jsonresult = json_decode($result);
-        $arrayresult = $jsonresult->results;
-        foreach ($arrayresult as $item) {
-            //echo json_encode($item);
-            $content = json_decode(json_encode($item), true);
-            $content['sid'] = $content['id'];
-            unset($content['id']);
-            foreach ($content as $key => $tmp) {
-                if(is_array($tmp)){
-                    $content[$key] = implode('', $tmp);
-                } elseif (is_null($tmp)) {
-                    $content[$key] = "";
+            $jsonresult = json_decode($result);
+            $arrayresult = $jsonresult->results;
+            foreach ($arrayresult as $item) {
+                //echo json_encode($item);
+                $content = json_decode(json_encode($item), true);
+                $content['sid'] = $content['id'];
+                unset($content['id']);
+                foreach ($content as $key => $tmp) {
+                    if(is_array($tmp)){
+                        $content[$key] = implode('', $tmp);
+                    } elseif (is_null($tmp)) {
+                        $content[$key] = "";
+                    }
+                }
+                $fromdb = Main_table::where('sid', $content['sid'])->get();
+                if(sizeof($fromdb) == 0){
+                    $record = new  Main_table($content);
+                    $record->save();
                 }
             }
-            $fromdb = Main_table::where('sid', $content['sid'])->get();
-            if(sizeof($fromdb) == 0){
-                $record = new  Main_table($content);
-                $record->save();
-            }
+            $next = $jsonresult->next;
         }
-
     }
 }

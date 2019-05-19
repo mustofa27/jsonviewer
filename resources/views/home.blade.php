@@ -4,22 +4,34 @@
 <div>
     <section class="content">
       <div class="row">
-        <div class="col-xs-11">
+        <div class="col-xs-12">
 
           <div class="box" style="overflow:auto">
             <div class="box-header">
               <h3 class="box-title">
-                @if(isset($data['title']))
-                    {{ $data['title'] }}
-                @endif
+                Filter
               </h3>
+              <div class="form-group">
+                <label>Kode Airlines</label>
+                <input type="text" class="form-control col-sm-12" required="" id="kode">
+              </div>
+              <!-- <div class="form-group">
+                <label>Tanggal</label>
+                <input id="datepicker" class='date form-control datepicker'>
+              </div> -->
+              <div class="form-group">
+                <label>Terminal</label>
+                <input type="text" class="form-control col-sm-12" required="" id="terminal">
+              </div>
+              <div class="form-group">
+                <button class="btn btn-primary" id="show" name="show">Show</button>
+              </div>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-              <table id="example1" class="table table-bordered table-striped">
+              <table id="table1" class="table table-bordered table-striped">
                 <thead>
                   <tr>
-                    <th>No</th>
                     <th>Airline</th>
                     <th>Flight</th>
                     <th>RegNo</th>
@@ -34,9 +46,8 @@
                     <th>Terminal</th>
                   </tr>
                 </thead>
-                <tfoot>
+                <!-- <tfoot>
                   <tr>
-                    <th>No</th>
                     <th>Airline</th>
                     <th>Flight</th>
                     <th>RegNo</th>
@@ -50,28 +61,7 @@
                     <th>Remark</th>
                     <th>Terminal</th>
                   </tr>
-                </tfoot>
-                <tbody>
-                  <?php $count = 0;?>
-                  @foreach($data['main'] as $s)
-                    <tr>
-                      <td>{{ ++$count }}</td>
-                      <td>{{ $s->airline }}</td>
-                      <td>{{ $s->airline }}</td>
-                      <td>{{ $s->regno }}</td>
-                      <td>{{ $s->regno }}</td>
-                      <td>{{ $s->belt }}</td>
-                      <td>{{ $s->time }}</td>
-                      <td>{{ $s->est }}</td>
-                      <td>{{ $s->act }}</td>
-                      <td>{{ $s->block }}</td>
-                      <td>{{ $s->bay }}</td>
-                      <td>{{ $s->bay }}</td>
-                      <td>{{ $s->terminal }}</td>
-                      <td></td>
-                    </tr>
-                  @endforeach
-                </tbody>
+                </tfoot> -->
               </table>
             </div>
             <!-- /.box-body -->

@@ -11,6 +11,7 @@
 |
 */
 Auth::routes();
-Route::get('/{kode}', 'HomeController@index')->name('home');
+Route::get('/home', 'HomeController@index')->name('home');
+Route::post('/ajax', 'HomeController@ajax')->name('ajax');
 Route::get('/get', 'HomeController@getdata')->name('getdata');
 Route::get('/dummydata', 'DataController@dataDummy')->name('dummydata');

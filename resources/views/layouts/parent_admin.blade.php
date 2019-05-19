@@ -45,7 +45,7 @@
         <div class="wrapper">
             <header class="main-header">
             <!-- Logo -->
-              <a href="../../index2.html" class="logo">
+              <a href="{{ route('home', ['kode' => 'all']) }}" class="logo">
                 <!-- mini logo for sidebar mini 50x50 pixels -->
                 <span class="logo-mini"><b>JS</b>ON</span>
                 <!-- logo for regular state and mobile devices -->
@@ -87,8 +87,11 @@
                 <ul class="sidebar-menu" data-widget="tree">
                 <li>
                   <a href="{{ route('home', ['kode' => 'all']) }}">
-                    <i class="fa fa-th"></i> <span>Dashboard</span>
+                    <i class="fa fa-th"></i> <span>All Airlines</span>
                   </a>
+                  <!-- <a href="{{ route('home', ['kode' => 'kode_airlines']) }}">
+                    <i class="fa fa-th"></i> <span>Nama Airlines</span>
+                  </a> -->
                 </li>
                 </ul>
               </section>
@@ -125,26 +128,60 @@
     <script src="{{ asset('admin_template/dist/js/demo.js') }}"></script>
     <!-- page script -->
     <script>
-      $(function () {
-        $('#example1').DataTable()
-        $('#example2').DataTable({
-          'paging'      : true,
-          'lengthChange': false,
-          'searching'   : false,
-          'ordering'    : true,
-          'info'        : true,
-          'autoWidth'   : false
-        })
-      })
-    </script>
-    <script src="{{asset('ckeditor/ckeditor.js')}}"></script>
+      $(document).ready(function() {
+          var table = $('#table1').DataTable({
+              serverSide: true,
+              processing: true,
+              searching: true,
+              ajax: {
+                  url : '{!! route('ajax') !!}',
+                  dataType : 'json',
+                  type : 'POST',
+                  data  : function( d ) {
+                    d._token      = "{{ csrf_token() }}";
+                    d.kode        = $('#kode').val();
+                    /*d.tanggal       = $('#tanggal').val();*/
+                    d.terminal      = $('#terminal').val();
+                  }
+              },
+              columns: [
+                  { data: 'airline', name: 'airline' },
+                  { data: 'callsign2', name: 'callsign2' },
+                  { data: 'regno', name: 'regno' },
+                  { data: 'airport_name', name: 'airport_name' },
+                  { data: 'belt', name: 'belt'},
+                  { data: 'new_time', name: 'new_time'},
+                  { data: 'est', name: 'est'},
+                  { data: 'act', name: 'act'},
+                  { data: 'block', name: 'block'},
+                  { data: 'bay', name: 'bay'},
+                  { data: 'status', name: 'status'},
+                  { data: 'terminal', name: 'terminal'}
+                  /*{ 
+                      "data": "id",
+                      "render": function ( data, type, full ) 
+                      {
+                              send =''
+                              if(hapus!=''){
+                                  send = send+adel+hapus.slice(0, -8)+data+"/delete"+bdel;
+                              }
+                              return send;
+                      }
+                  }*/
+              ]
+              ,
+              sDom: "<'row'<'col-md-6'l><'col-md-6'f>r>t<'row'<'col-sm-12 col-md-6 col-lg-6'i><'col-sm-12 col-md-6 col-lg-6 center'p>>",
+              oLanguage: 
+              {
+                  sLengthMenu: "_MENU_ records per page"
+              }
+          });
 
-    <script>
-      var konten = document.getElementById("isi");
-      CKEDITOR.replace(konten,{
-        language:'en-gb'
+          var el = document.getElementById('show');
+          el.addEventListener("click", function(e){
+              table.ajax.reload();
+          });
       });
-      CKEDITOR.config.allowedContent = true;
     </script>
 </body>
 </html>
