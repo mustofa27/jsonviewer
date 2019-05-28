@@ -26,7 +26,7 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule->command('getdata')
-                 ->everyFifteenMinutes();
+                 ->everyFiveMinutes();
         /*$schedule->call(function () {
             User::get()->first()->delete();
         })->everyFiveMinutes();*/
