@@ -16,3 +16,5 @@ Route::post('/ajax', 'HomeController@ajax')->name('ajax');
 Route::get('/get', 'HomeController@getdata')->name('getdata');
 Route::get('/dummydata', 'DataController@dataDummy')->name('dummydata');
 Route::get('/tes', 'DataController@teskoneksi')->name('tes');
+Route::get('/airlines/{kode}/{terminal}', 'HomeController@getScheduleToday')->name('airlines');
+

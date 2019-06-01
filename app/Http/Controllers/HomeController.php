@@ -49,6 +49,19 @@ class HomeController extends Controller
         return DataTables::of($data)->make(true);
     }
 
+    public function getScheduleToday($kode,$terminal){
+        $date = date('Y-m-d');
+        $data['title'] = $kode;
+        $query = Main_table::where('airline',$kode);
+        if($terminal==''){
+            $query->get();
+        } else{
+            $query = $query->where('terminal',$terminal)->where('new_time','like','%'.$date.'%')->get();
+        }
+        $data['airline'] = $query;
+        return view('perairline', compact('data'));
+    }
+
     public function getdata()
     {
         $username='ict.sub';
