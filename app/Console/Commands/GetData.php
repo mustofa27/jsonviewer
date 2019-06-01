@@ -39,13 +39,13 @@ class GetData extends Command
     public function handle()
     {
         $page = 0;
-        $URL='http://10.2.19.22/api/operational?new_time_gte=0000-00-01T00:00:01&new_time_lte=2019-05-31T23:59:59&page=';
+        $URL='http://10.2.19.12/api/operational?format=json&new_time_gte=2019-01-01T00:00:01&new_time_lte=2019-05-31T23:59:59&page=';
         //$URL='localhost/jsonviewer/public/dummydata?page=';
         $next = 'ada';
         while(!is_null($next)){
             $page++;
-            $username='ict.sub';
-            $password='P@ssw0rdIT';
+            $username='admin';
+            $password='inalixOK';
              // $data = array("account" => "1234", "dob" => "30051987", "site" => "mytestsite.com");
             $url = $URL.$page;
             $ch = curl_init();

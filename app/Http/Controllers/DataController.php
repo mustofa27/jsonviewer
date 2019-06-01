@@ -35,7 +35,7 @@ class DataController extends Controller
 	public function teskoneksi(){
 $username='admin';
 $password='inalixOK';
-$URL='http://10.2.19.12/api/operational?format=json&new_time_gte=0000-00-01T00:00:01&new_time_lte=2019-05-19T23:59:59&page=1';
+$URL='http://10.2.19.12/api/operational?format=json&new_time_gte=2019-01-01T00:00:01&new_time_lte=2019-05-19T23:59:59&page=1';
  // $data = array("account" => "1234", "dob" => "30051987", "site" => "mytestsite.com");
 
 $ch = curl_init();
