@@ -75,7 +75,7 @@
                       @else
                       <td>{{ $s->est }}</td>
                       @endif
-                      @if(!empty($s->est))
+                      @if(!empty($s->act))
                       <?php 
                         $time = explode("T",$s->act);
                         $jam = explode("+", $time[1]);
