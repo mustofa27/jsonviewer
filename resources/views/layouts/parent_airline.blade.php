@@ -130,5 +130,10 @@
     <!-- AdminLTE for demo purposes -->
     <script src="{{ asset('admin_template/dist/js/demo.js') }}"></script>
     <!-- page script -->
+    <script>
+      $(function () {
+        $('#table1').DataTable()
+      })
+    </script>
   </body>
 </html>
