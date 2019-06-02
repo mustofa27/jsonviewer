@@ -45,7 +45,7 @@
         <div class="wrapper">
             <header class="main-header">
             <!-- Logo -->
-              <a href="{{ route('home', ['kode' => 'all']) }}" class="logo">
+              <a href="{{ route('home') }}" class="logo">
                 <!-- mini logo for sidebar mini 50x50 pixels -->
                 <span class="logo-mini"><b>JS</b>ON</span>
                 <!-- logo for regular state and mobile devices -->
@@ -86,7 +86,7 @@
               <!-- sidebar menu: : style can be found in sidebar.less -->
                 <ul class="sidebar-menu" data-widget="tree">
                 <li>
-                  <a href="{{ route('home', ['kode' => 'all']) }}">
+                  <a href="{{ route('home') }}">
                     <i class="fa fa-th"></i> <span>All Airlines</span>
                   </a>
                   <a href="{{ route('airlines', ['kode' => 'AWQ', 'terminal'=>'t1']) }}">
