@@ -38,8 +38,9 @@ class GetData extends Command
      */
     public function handle()
     {
+        $date = date('Y-m-d');
         $page = 0;
-        $URL='http://10.2.19.12/api/operational?format=json&new_time_gte=2019-01-01T00:00:01&new_time_lte=2019-05-31T23:59:59&page=';
+        $URL='http://10.2.19.12/api/operational?format=json&new_time_gte='.$date.'T00:00:01&new_time_lte='.$date.'T23:59:59&page=';
         //$URL='localhost/jsonviewer/public/dummydata?page=';
         $next = 'ada';
         while(!is_null($next)){
@@ -73,10 +74,12 @@ class GetData extends Command
                         $content[$key] = "";
                     }
                 }
-                $fromdb = Main_table::where('sid', $content['sid'])->get();
-                if(sizeof($fromdb) == 0){
+                $fromdb = Main_table::where('sid', $content['sid'])->first();
+                if(is_null($fromdb)){
                     $record = new  Main_table($content);
                     $record->save();
+                } else{
+                    $fromdb->update($content);
                 }
             }
             $next = $jsonresult->next;
