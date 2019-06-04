@@ -18,7 +18,7 @@ class RedirectIfAuthenticated
     public function handle($request, Closure $next, $guard = null)
     {
         if (Auth::guard($guard)->check()) {
-            return redirect('/airlines/AWQ/T2');
+            return redirect('/airlines/AWQ/T2/D');
         }
 
         return $next($request);
