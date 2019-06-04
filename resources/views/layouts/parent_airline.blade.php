@@ -86,11 +86,23 @@
               <!-- sidebar menu: : style can be found in sidebar.less -->
                 <ul class="sidebar-menu" data-widget="tree">
                 <li>
-                  <a href="{{ route('airlines', ['kode' => 'AWQ', 'terminal'=>'t1']) }}">
-                    <i class="fa fa-th"></i> <span>AWQ Terminal 1</span>
+                  <a href="{{ route('airlines', ['kode' => 'AWQ', 'terminal'=>'t1', 'direction'=>'D']) }}">
+                    <i class="fa fa-th"></i> <span>AWQ Terminal 1 Departure</span>
                   </a>
-                  <a href="{{ route('airlines', ['kode' => 'AWQ', 'terminal'=>'t2']) }}">
-                    <i class="fa fa-th"></i> <span>AWQ Terminal 2</span>
+                </li>
+                <li>
+                  <a href="{{ route('airlines', ['kode' => 'AWQ', 'terminal'=>'t1', 'direction'=>'A']) }}">
+                    <i class="fa fa-th"></i> <span>AWQ Terminal 1 Arrival</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="{{ route('airlines', ['kode' => 'AWQ', 'terminal'=>'t2', 'direction'=>'D']) }}">
+                    <i class="fa fa-th"></i> <span>AWQ Terminal 2 Departure</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="{{ route('airlines', ['kode' => 'AWQ', 'terminal'=>'t2', 'direction'=>'A']) }}">
+                    <i class="fa fa-th"></i> <span>AWQ Terminal 2 Arrival</span>
                   </a>
                 </li>
                 </ul>

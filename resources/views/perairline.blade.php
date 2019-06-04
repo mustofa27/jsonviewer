@@ -62,7 +62,7 @@
                         $time = explode("T",$s->new_time);
                         $jam = explode("+", $time[1]);
                       ?>
-                      <td>{{ $jam[1] }}</td>
+                      <td>{{ $jam[0] }}</td>
                       @else
                       <td>{{ $s->new_time }}</td>
                       @endif
@@ -71,7 +71,7 @@
                         $time = explode("T",$s->est);
                         $jam = explode("+", $time[1]);
                       ?>
-                      <td>{{ $jam[1] }}</td>
+                      <td>{{ $jam[0] }}</td>
                       @else
                       <td>{{ $s->est }}</td>
                       @endif
@@ -80,7 +80,7 @@
                         $time = explode("T",$s->act);
                         $jam = explode("+", $time[1]);
                       ?>
-                      <td>{{ $s->jam[1] }}</td>
+                      <td>{{ $s->jam[0] }}</td>
                       @else
                       <td>{{ $s->act }}</td>
                       @endif
@@ -89,7 +89,7 @@
                         $time = explode("T",$s->block);
                         $jam = explode("+", $time[1]);
                       ?>
-                      <td>{{ $s->jam[1] }}</td>
+                      <td>{{ $s->jam[0] }}</td>
                       @else
                       <td>{{ $s->block }}</td>
                       @endif
