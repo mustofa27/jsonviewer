@@ -59,7 +59,7 @@ class HomeController extends Controller
         if($direction!=''){
             $query = $query->where('direction',$direction);
         }
-        $query->get();
+        $query = $query->get();
         $data['airline'] = $query;
         return view('perairline', compact('data'));
     }
