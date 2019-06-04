@@ -45,7 +45,7 @@
         <div class="wrapper">
             <header class="main-header">
             <!-- Logo -->
-              <a href="{{ route('airlines', ['kode' => 'AWQ', 'terminal'=>'t1']) }}" class="logo">
+              <a href="{{ route('airlines', ['kode' => 'AWQ', 'terminal'=>'t1', 'direction'=>'D']) }}" class="logo">
                 <!-- mini logo for sidebar mini 50x50 pixels -->
                 <span class="logo-mini"><b>JS</b>ON</span>
                 <!-- logo for regular state and mobile devices -->
